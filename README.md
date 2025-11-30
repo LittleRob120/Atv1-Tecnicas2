@@ -1,115 +1,62 @@
-# atvii-atlantis
+# Atlantis - Atividade I
 
-Aplicação de console em TypeScript para gestão de clientes, documentos e endereços, organizada em módulos com processos, menus e impressões via terminal.
+Projeto em TypeScript com exemplos de modelos e protótipo de clonagem para clientes, endereços, documentos e telefones. Inclui scripts de teste em Node usando prompt-sync.
 
-## Tecnologias
+## Estrutura
 
-- TypeScript
-- Node.js
-- Execução via terminal (stdin/stdout)
-
-## Estrutura do Projeto
-
-- Ponto de entrada:
-  - `src/app/app.ts`
-- I/O:
-  - `src/io/entrada.ts` (leitura de terminal)
-- Domínio:
-  - `src/dominio/armazem.ts` (armazenamento em memória)
+- [enumeracoes/tipoDocumento.ts](atvi-atlantis/enumeracoes/tipoDocumento.ts) — Enum de tipos de documento.
+- [interfaces/prototipo.ts](atvi-atlantis/interfaces/prototipo.ts) — Interface de protótipo com método [`interfaces.Prototipo.clonar`](atvi-atlantis/interfaces/prototipo.ts).
 - Modelos:
-  - `src/modelos/cliente.ts`
-  - `src/modelos/documento.ts`
-  - `src/modelos/endereco.ts`
-  - `src/modelos/telefone.ts`
-- Enumerações:
-  - `src/enumeracoes/TipoDocumento.ts`
-- Interfaces:
-  - `src/interfaces/impressor.ts`
-  - `src/interfaces/menu.ts`
-  - `src/interfaces/prototipo.ts`
-- Abstrações:
-  - `src/ts/abstracoes/processo.ts`
-- Menus:
-  - `src/menus/menuPricipal.ts`
-  - `src/menus/menuTipoCadastroCliente.ts`
-  - `src/menus/menuTipoDocumento.ts`
-  - `src/menus/menuTipoListagemClientes.ts`
-- Impressores:
-  - `src/impressores/impressorCliente.ts`
-  - `src/impressores/impressorDocumento.ts`
-  - `src/impressores/impressorDocumentos.ts`
-  - `src/impressores/impressorEndereco.ts`
-- Processos:
-  - `src/processos/principal.ts`
-  - `src/processos/tipoCadastroCliente.ts`
-  - `src/processos/tipoListagemClientes.ts`
-  - `src/processos/cadastroClienteTitular.ts`
-  - `src/processos/cadastroClienteDependente.ts`
-  - `src/processos/cadastroEnderecoTitular.ts`
-  - `src/processos/cadastrarDocumentosCliente.ts`
-  - `src/processos/cadastroRg.ts`
-  - `src/processos/listagemTitulares.ts`
-  - `src/processos/listagemDependentesDeTitular.ts`
-  - `src/processos/listagemTitularDeDependente.ts`
-  - `src/processos/atualizarCliente.ts`
-  - `src/processos/removerCliente.ts`
+  - [`modelos.Cliente`](atvi-atlantis/modelos/cliente.ts)
+  - [`modelos.Documento`](atvi-atlantis/modelos/documento.ts)
+  - [`modelos.Endereco`](atvi-atlantis/modelos/endereco.ts)
+  - [`modelos.Telefone`](atvi-atlantis/modelos/telefone.ts)
+- Testes (entrada/execução):
+  - [teste/entrada.ts](atvi-atlantis/teste/entrada.ts)
+  - [teste/index.ts](atvi-atlantis/teste/index.ts)
+- Saída compilada em JavaScript:
+  - [js/modelos](atvi-atlantis/js/modelos)
+  - [js/teste/index.js](atvi-atlantis/js/teste/index.js)
+
+## Destaques
+
+- Clonagem de endereço via [`modelos.Endereco.clonar`](atvi-atlantis/modelos/endereco.ts) usando o padrão Protótipo ([`interfaces.Prototipo`](atvi-atlantis/interfaces/prototipo.ts)).
+- Enum de documento: [`enumeracoes.TipoDocumento`](atvi-atlantis/enumeracoes/tipoDocumento.ts).
 
 ## Pré-requisitos
 
-- Node.js (LTS recomendado)
+- Node.js 16+
 - npm
+- TypeScript (`tsc`)
 
 ## Instalação
 
-1. Clone o repositório.
-2. Entre na pasta `atvii-atlantis`.
-3. Instale as dependências:
-   ```
-   npm install
-   ```
+```sh
+npm install
+```
+
+## Build
+
+Compila TypeScript para a pasta js:
+
+```sh
+npx tsc
+```
 
 ## Execução
 
-- Compilar e executar:
-  ```
-  npm run build && npm start
-  ```
-- Executar diretamente (modo desenvolvimento, se disponível):
-  ```
-  npm start
-  ```
+Você pode executar a versão compilada:
 
-## Funcionalidades
+```sh
+node js/teste/index.js
+```
 
-- Cadastro de clientes: titulares e dependentes.
-- Cadastro e associação de documentos (RG e outros).
-- Cadastro de endereços.
-- Listagem de titulares e dependentes.
-- Atualização e remoção de clientes.
-- Navegação por menus no terminal.
+Ou executar direto os fontes se preferir configurar ts-node.
 
-## Fluxo
+## Arquivos principais
 
-- `app.ts` inicia o processo principal.
-- `processos/principal.ts` orquestra menus e ações.
-- Entrada de dados via `io/entrada.ts`.
-- Impressão de dados via impressores em `src/impressores`.
-
-## Desenvolvimento
-
-- Código fonte em `src/`.
-- Lógica de negócio concentrada em `src/processos/`.
-- Menus apenas direcionam o fluxo.
-
-## Testes (sugestão)
-
-- Usar Vitest ou Jest.
-- Criar pasta `tests/`.
-- Adicionar scripts no `package.json`:
-  - `"test": "vitest"` ou `"test": "jest"`
-
-## Convenções
-
-- Separação por camadas: modelos, processos, menus, impressores.
-- Enumeradores em `src/enumeracoes`.
-- Evitar lógica de negócio em menus; manter em processos.
+- Cliente: [`modelos.Cliente`](atvi-atlantis/modelos/cliente.ts)
+- Endereço com clonagem: [`modelos.Endereco`](atvi-atlantis/modelos/endereco.ts)
+- Documento: [`modelos.Documento`](atvi-atlantis/modelos/documento.ts)
+- Telefone: [`modelos.Telefone`](atvi-atlantis/modelos/telefone.ts)
+- Fluxo de teste: [teste/index.ts](atvi-atlantis/teste/index.ts), [teste/entrada.ts](atvi-atlantis/teste/entrada.ts)
